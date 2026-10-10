@@ -1,0 +1,7 @@
+*.pfx
+*.key
+*.pem
+*.env
+*.log
+*.rdp
+secrets*
