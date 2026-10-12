@@ -48,7 +48,7 @@ Unlock-ADAccount -Identity <samaccountname>
 Get-ADComputer -Filter * | Select-Object Name
 
 # Check a computer object
-# Note: <hostname> is a placeholder, e.g. WIN-35PF0F89GKC
+# Note: <hostname> is a placeholder, e.g. DESKTOP-9U70BSM
 Get-ADComputer -Identity <hostname> -Properties DNSHostName, Enabled | Select-Object Name, DNSHostName, Enabled
 
 # Check deleted objects (requires AD Recycle Bin for restore)
