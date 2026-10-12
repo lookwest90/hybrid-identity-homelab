@@ -29,18 +29,18 @@ Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
 Install-ADDSForest -DomainName "lab.ramco.internal" -DomainNetbiosName "LAB" -InstallDns
 
 # Create a domain user
-# Note: <password> is prompted; do not type it in plain text
+Note: <password> is prompted; do not type it in plain text
 New-ADUser -Name "Jack Bauer" -GivenName "Jack" -Surname "Bauer" -SamAccountName "BauerJ" -UserPrincipalName "BauerJ@lab.ramco.internal" -AccountPassword (Read-Host -AsSecureString "Password") -Enabled $true
 
 # Find a user by display name
 Get-ADUser -Filter {Name -like "*Bauer*"} -Properties SamAccountName, UserPrincipalName, Enabled, LockedOut | Select-Object Name, SamAccountName, UserPrincipalName, Enabled, LockedOut
 
 # Verify a specific user by logon name
-# Note: <samaccountname> is a placeholder, e.g. BauerJ
+Note: <samaccountname> is a placeholder, e.g. BauerJ
 Get-ADUser -Identity <samaccountname> -Properties Enabled, LockedOut, DistinguishedName
 
 # Enable or unlock an account
-# Note: <samaccountname> is a placeholder
+Note: <samaccountname> is a placeholder
 Enable-ADAccount -Identity <samaccountname>
 Unlock-ADAccount -Identity <samaccountname>
 
@@ -48,7 +48,7 @@ Unlock-ADAccount -Identity <samaccountname>
 Get-ADComputer -Filter * | Select-Object Name
 
 # Check a computer object
-# Note: <hostname> is a placeholder, e.g. DESKTOP-9U70BSM
+Note: <hostname> is a placeholder, e.g. DESKTOP-9U70BSM
 Get-ADComputer -Identity <hostname> -Properties DNSHostName, Enabled | Select-Object Name, DNSHostName, Enabled
 
 # Check deleted objects (requires AD Recycle Bin for restore)
@@ -56,7 +56,7 @@ Get-ADObject -SearchBase "CN=Deleted Objects,DC=lab,DC=ramco,DC=internal" -Inclu
 
 # Add a user to Domain Admins (only if full domain control is needed)
 Add-ADGroupMember -Identity "Domain Admins" -Members <samaccountname>
-# Note: <samaccountname> is a placeholder
+Note: <samaccountname> is a placeholder
 
 # Check DC locator and DNS resolution
 nltest /dsgetdc:lab.ramco.internal
@@ -72,7 +72,7 @@ Set-NetConnectionProfile -InterfaceAlias "Ethernet0" -NetworkCategory Private
 # ---------- Workstation (Win11) ----------
 
 # Point workstation DNS at the DC
-# Note: adjust the interface alias if it differs (e.g. "Ethernet")
+Note: adjust the interface alias if it differs (e.g. "Ethernet")
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.127.129
 
 # Join the domain (prompts for DC Administrator password; do not put it on the command line)
@@ -92,11 +92,11 @@ net user Administrator *
 Get-LocalUser
 
 # Remove a local account
-# Note: "Jack Bauer" is an example; use the exact name from Get-LocalUser
+Note: "Jack Bauer" is an example; use the exact name from Get-LocalUser
 Remove-LocalUser -Name "Jack Bauer"
 
 # Remove a leftover profile folder (confirm the folder name first)
-# Note: "Jack Bauer" is an example; copy any needed files first
+Note: "Jack Bauer" is an example; copy any needed files first
 Remove-Item "C:\Users\Jack Bauer" -Recurse -Force
 
 # Disable the built-in Administrator when no longer needed
@@ -110,3 +110,4 @@ slmgr /dlv
 # Reset the evaluation period (reboot afterward)
 slmgr /rearm
 ```
+#A WORK IN PROGRESS
