@@ -4,4 +4,11 @@
 *.env
 *.log
 *.rdp
+*.vmdk
+*.vmem
+*.vmsn
+*.vmss
+*.nvram
+*.vmx.lck
+*.iso
 secrets*
