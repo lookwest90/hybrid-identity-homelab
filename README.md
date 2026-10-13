@@ -34,8 +34,3 @@ Trusted Platform Module: Present.
 7. Set DNS as Server25's static IP and check with nltest
 8. join the domain with Add-Computer command
 9. Sign in and verify user is on domain
-
-# Typical fuck-ups
-Spelling.
-Functionality of your brain.
-Distractions.
