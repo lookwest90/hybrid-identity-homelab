@@ -39,7 +39,7 @@ Trusted Platform Module: Present.
 
 ### Phase 1: Core AD DS Deployment (Completed)
 - [x] VMware virtual network configuration
-- [x] Windows Server 2025 domain controller deployment (`lab.ramco.internal`)
+- [x] Windows Server 2025 domain controller deployment (`lab.TracenAcademy.internal`)
 - [x] Static IP configuration and local DNS self-resolution
 - [x] Windows 11 client workstation domain join
 - [x] Basic AD user account provisioning via PowerShell
