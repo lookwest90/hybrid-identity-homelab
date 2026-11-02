@@ -60,8 +60,8 @@ Trusted Platform Module: Present.
 - [ ] Centralize audit logging for failed logons and account lockouts
 
 ### Phase 5: Cloud & Hybrid Identity (Planned)
-- [ ] Set up a free Entra ID tenant
-- [ ] Deploy Microsoft Entra Connect to synchronize on-premises AD DS users to the cloud
+- [x] Set up a free Entra ID tenant
+- [x] Deploy Microsoft Entra Connect to synchronize on-premises AD DS users to the cloud
 - [ ] Implement Mobile OS VMs to simulate external device handling
 
 
