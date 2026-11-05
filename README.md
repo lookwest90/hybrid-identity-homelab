@@ -28,8 +28,8 @@ Trusted Platform Module: Present.
 1. New VM with Windows Server 2025
 2. Set admin pass
 3. Static IP - see commands for reference
-4. install AD DS and promote to a new forest (lab.ramco.internal) - see commands reference
-5. Create a user (Bauerj) with the "create a domain user" command - see commands reference
+4. install AD DS and promote to a new forest (lab.TracenAcademy.internal) - see commands reference
+5. Create a user (Yakikawa) with the "create a domain user" command - see commands reference
 6. make a second VM using Windows 11 x64 (pro or enterprise because home aint it)
 7. Set DNS as Server25's static IP and check with nltest
 8. join the domain with Add-Computer command
