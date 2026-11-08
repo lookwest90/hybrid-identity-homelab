@@ -1,0 +1,49 @@
+Get-DnsServerForwarder
+Get-DnsServerZone
+Add-DnsServerForwarder -IPAddress 8.8.8.8 -PassThru
+Add-DnsServerPrimaryZone -NetworkId "172.16.156.0/24" -ReplicationScope Domain -DynamicUpdate Secure
+Resolve-DnsName 172.16.156.10
+Get-DnsServerZone -Name "156.16.172.in-addr.arpa" | Select-Object ZoneName, DynamicUpdate, ReplicationScope
+Resolve-DnsName login.microsoftonline.com -Server 172.16.156.10
+
+
+The Domain Controller answered 'name-to-IP' for lab.TracenAcademy.internal, I added a forwarder so it can pass public names to an
+upstream resolver instead of accessing the internet root server. This will keep EntraID and system updates from not working. 
+An reverse zone was for 172.16.156.0/24 was created to answer the 'IP-to-name' queries (https://www.cloudflare.com/learning/dns/dns-records/dns-ptr-record/)
+for my DC's PRT record. Setting dynamic updates to secure ensures only domain members can register records.
+
+Step 1: Check what is already there
+
+Get-DnsServerForwarder
+Get-DnsServerZone
+
+A good rule of thumb is to know what already exists before changes are made.
+
+Step 2: Tell the Domain Controller where to ask for outside names
+
+Add-DnsServerForwarder -IPAddress 8.8.8.8 -PassThru
+
+Since this is an internal lab, the DC only knows the address in the lab. For outside queries like google.com or umamusume.com,
+the DC will now ask 8.8.8.8 (primary DNS server for Google)
+
+Step 3: Create the reverse zone for my subnet
+
+Add-DnsServerPrimaryZone -NetworkId "172.16.156.0/24" -ReplicationScope Domain -DynamicUpdate Secure
+
+This step gives the DC the ability to turn that pesky IP back into a name
+
+Step 4: Check the DC's own reverse record
+
+Resolve-DnsName 172.16.156.10
+(this should return the DC's name)
+
+Step 5: Test outside names through the Domain Controller
+
+Resolve-DnsName umamusume.com -Server 172.16.156.10
+This will return the address
+
+Step 6: Confirmation, Confirmation, Confirmation
+
+Get-DnsServerZone -Name "156.16.172.in-addr.arpa" | Select-Object ZoneName, DynamicUpdate, ReplicationScope
+
+Checking IsDsIntegrated for 'True' and DynamicUpdate is 'Secure'
