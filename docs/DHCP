@@ -1,0 +1,5 @@
+At the moment my lab network retrieves its IP's manually, which is fine at this scale but will not work on a larger network
+or with a variety of machines. Adding DHCP will automatically assign IP's, subnet mask, the default gateway and a DNS server
+when a client connects, eliminating the need to manually apply this information to each device.
+
+A DHCP will need to be established AFTER the DNS and before GPO's are created.
