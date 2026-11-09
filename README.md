@@ -47,6 +47,8 @@ Trusted Platform Module: Present.
 ### Phase 2: Core Infrastructure Services (In Progress)
 - [x] Configure local DNS forwarders and reverse lookup zones ![DNS confirmation](Images/DNSsetup1.png)
 - [x] Deploy DHCP role on Windows Server with active scopes and reservations
+      ![DHCP Confirmed](Images/DomainControllerDHCP.png)
+      ![Workstation DHCP](Images/WorkstationDhcp3.png)
 - [ ] Create and enforce baseline Group Policy Objects (GPOs) for client endpoints
 
 ### Phase 3: Advanced Network & Multi-Site Architecture (Planned)
