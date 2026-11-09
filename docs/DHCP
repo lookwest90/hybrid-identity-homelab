@@ -3,3 +3,48 @@ or with a variety of machines. Adding DHCP will automatically assign IP's, subne
 when a client connects, eliminating the need to manually apply this information to each device.
 
 A DHCP will need to be established AFTER the DNS and before GPO's are created.
+
+
+Step 1: Authorizing DHCP server in AD
+
+Add-DhcpServerInDC -DnsName WIN-U0PQBSD70JM.lab.TracenAcademy.internal -IPAddress 172.16.156.10
+AD has to approve a DHCP server before it will give out leases and prevents unauthorized DHCP servers on the domain
+(confirm with Get-DhcpServerInDC)
+
+Step 2: Creating scope
+Add-DhcpServerv4Scope -Name "Lab-Clients" -StartRange 172.16.156.100 -EndRange 172.16.156.200 -SubnetMask 255.255.255.0
+Creates a pool of addresses that the DHCP can dole out, using .100 - .200 is common practice so they do not overlap with 
+gateways, networking devices or the DC (.1 .2 or .10)
+
+Step 3: Set the options the clients receive
+Set-DhcpServerv4OptionValue -ScopeId 172.16.156.0 -Router 172.16.156.2 -DnsServer 172.16.156.10 -DnsDomain lab.TracenAcademy.internal
+Each client will get the gateway, the Domain Controller as the DNS and the domain name. The DC as the DNS is critical for 
+finding the domain and applying GPOs
+
+Step 4: Activating the scope
+Set-DhcpServerv4Scope -ScopeId 172.16.156.0 -State Active
+
+Scopes are inactive by default and wont serve leases until this activation
+
+CONFIRMATION, CONFIRMATION, CONFIRMATION
+
+Get-DhcpServerv4Scope
+Get-DhcpServerv4OptionValue -ScopeId 172.16.156.0
+
+------------------------------------------------------------------------------------
+On an administrator workstation (Director Akikawa in this case)
+
+Run Powershell in admin
+
+netsh interface ipv4 set address name="Ethernet0" source=dhcp
+netsh interface ipv4 set dnsservers name="Ethernet0" source=dhcp
+
+ipconfig /release
+ipconfig /renew
+ipconfig /all
+
+Poof!
+use:
+nslookup lab.TracenAcademy.interal
+nslookup umamusume.com
+Resolve-DnsName 172.16.156.100
