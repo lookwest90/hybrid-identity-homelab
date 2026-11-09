@@ -45,8 +45,8 @@ Trusted Platform Module: Present.
 - [x] Basic AD user account provisioning via PowerShell
 
 ### Phase 2: Core Infrastructure Services (In Progress)
-- [ ] Configure local DNS forwarders and reverse lookup zones
-- [ ] Deploy DHCP role on Windows Server with active scopes and reservations
+- [x] Configure local DNS forwarders and reverse lookup zones ![DNS confirmation](Images/DNSsetup1.png)
+- [x] Deploy DHCP role on Windows Server with active scopes and reservations
 - [ ] Create and enforce baseline Group Policy Objects (GPOs) for client endpoints
 
 ### Phase 3: Advanced Network & Multi-Site Architecture (Planned)
@@ -61,7 +61,7 @@ Trusted Platform Module: Present.
 
 ### Phase 5: Cloud & Hybrid Identity (In Progress)
 - [x] Set up a free Entra ID tenant
-      See ![Entra ID user sync 1](images/EntraID1.png)![ and Entra ID user sync 1](images/EntraID2.png)
+      See ![Entra ID user sync 1](Images/EntraID1.png)![ and Entra ID user sync 1](Images/EntraID2.png)
 - [x] Deploy Microsoft Entra Connect to synchronize on-premises AD DS users to the cloud
 - [ ] Implement Mobile OS VMs to simulate external device handling
 
